@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.sundy.bbl.databinding.ActivityMainBinding;
 import com.sundy.bbl.db.Injection;
+import com.sundy.bbl.db.User;
 import com.sundy.bbl.mvvm.UserViewModel;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,30 +24,24 @@ import static com.sundy.bbl.R.layout.activity_main;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    private TextView mUserName;
-
-    private EditText mUserNameInput;
-
-    private Button mUpdateButton;
 
     private ViewModelFactory mViewModelFactory;
 
     private UserViewModel mViewModel;
 
     private final CompositeDisposable mDisposable = new CompositeDisposable();
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(activity_main);
-
-        mUserName = findViewById(R.id.user_name);
-        mUserNameInput = findViewById(R.id.user_name_input);
-        mUpdateButton = findViewById(R.id.update_user);
+        binding = DataBindingUtil.setContentView(this, activity_main);
 
         mViewModelFactory = Injection.provideViewModelFactory(this);
         mViewModel = new ViewModelProvider(this, mViewModelFactory).get(UserViewModel.class);
-        mUpdateButton.setOnClickListener(v -> updateUserName());
+        binding.updateUser.setOnClickListener(v -> updateUserName());
+        User user=new User("sundy");
+        binding.setUser(user);
     }
 
     @Override
@@ -58,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         mDisposable.add(mViewModel.getUserName()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(userName -> mUserName.setText(userName),
+                .subscribe(userName -> binding.userName.setText(userName),
                         throwable -> Log.e(TAG, "Unable to get username", throwable)));
     }
 
@@ -71,15 +66,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserName() {
-        String userName = mUserNameInput.getText().toString();
+        String userName = binding.userNameInput.getText().toString();
         // Disable the update button until the user name update has been done
-        mUpdateButton.setEnabled(false);
+        binding.updateUser.setEnabled(false);
         // Subscribe to updating the user name.
         // Re-enable the button once the user name has been updated
         mDisposable.add(mViewModel.updateUserName(userName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(() -> mUpdateButton.setEnabled(true),
+                .subscribe(() -> binding.updateUser.setEnabled(true),
                         throwable -> Log.e(TAG, "Unable to update username", throwable)));
     }
 }

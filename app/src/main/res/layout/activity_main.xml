@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="user"
+            type="com.sundy.bbl.db.User" />
     </data>
 
     <LinearLayout
@@ -16,11 +18,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="32sp"
-            tools:text="Hello World!" />
+            tools:text="@{user.userName}" />
 
         <EditText
             android:id="@+id/user_name_input"
             android:layout_width="match_parent"
+            android:text="@={user.userName}"
             android:layout_height="wrap_content" />
 
         <Button
