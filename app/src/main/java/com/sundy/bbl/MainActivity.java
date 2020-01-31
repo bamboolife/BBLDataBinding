@@ -2,18 +2,18 @@ package com.sundy.bbl;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sundy.bbl.databinding.ActivityMainBinding;
 import com.sundy.bbl.db.Injection;
-import com.sundy.bbl.db.User;
-import com.sundy.bbl.mvvm.UserViewModel;
+import com.sundy.bbl.db.entity.User;
+import com.sundy.bbl.fgt.LiveDataFragment;
+import com.sundy.bbl.mvvm.ViewModelFactory;
+import com.sundy.bbl.mvvm.viewmodel.UserViewModel;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
         binding.updateUser.setOnClickListener(v -> updateUserName());
         User user=new User("sundy");
         binding.setUser(user);
+
+        FragmentManager manager=getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.container, LiveDataFragment.getInstance()).commitNow();
     }
 
     @Override

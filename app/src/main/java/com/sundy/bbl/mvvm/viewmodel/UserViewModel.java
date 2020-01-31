@@ -1,13 +1,12 @@
-package com.sundy.bbl.mvvm;
+package com.sundy.bbl.mvvm.viewmodel;
 
 import androidx.lifecycle.ViewModel;
 
-import com.sundy.bbl.db.User;
+import com.sundy.bbl.db.entity.User;
 import com.sundy.bbl.db.UserdataSource;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
-import io.reactivex.functions.Function;
 
 /**
  * 项目名称：BBLDataBinding

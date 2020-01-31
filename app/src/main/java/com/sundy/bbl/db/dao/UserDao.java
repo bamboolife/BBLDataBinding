@@ -1,9 +1,11 @@
-package com.sundy.bbl.db;
+package com.sundy.bbl.db.dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+
+import com.sundy.bbl.db.entity.User;
 
 import io.reactivex.Completable;
 import io.reactivex.Flowable;

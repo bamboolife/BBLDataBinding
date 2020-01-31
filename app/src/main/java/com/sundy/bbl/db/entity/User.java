@@ -1,4 +1,4 @@
-package com.sundy.bbl.db;
+package com.sundy.bbl.db.entity;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.BaseObservable;
@@ -8,12 +8,10 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
-import com.sundy.bbl.BR;
-
 import java.util.UUID;
 
 @Entity(tableName = "users")
-public class User  extends BaseObservable {
+public class User  extends BaseObservable {//双向绑定就继承BaseObservable
     @NonNull
     @PrimaryKey
     @ColumnInfo(name = "userid")

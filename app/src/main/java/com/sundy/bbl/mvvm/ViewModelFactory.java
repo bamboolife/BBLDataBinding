@@ -1,13 +1,11 @@
-package com.sundy.bbl;
-
-import android.os.UserManager;
+package com.sundy.bbl.mvvm;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sundy.bbl.db.UserdataSource;
-import com.sundy.bbl.mvvm.UserViewModel;
+import com.sundy.bbl.mvvm.viewmodel.UserViewModel;
 
 /**
  * 项目名称：BBLDataBinding

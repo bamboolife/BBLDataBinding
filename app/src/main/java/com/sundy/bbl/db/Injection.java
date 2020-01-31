@@ -2,7 +2,7 @@ package com.sundy.bbl.db;
 
 import android.content.Context;
 
-import com.sundy.bbl.ViewModelFactory;
+import com.sundy.bbl.mvvm.ViewModelFactory;
 
 /**
  * 项目名称：BBLDataBinding
@@ -14,7 +14,7 @@ import com.sundy.bbl.ViewModelFactory;
  */
 public class Injection {
     public static UserdataSource provideUserDataSource(Context context){
-        UsersDatabase database=UsersDatabase.getInstance(context);
+        AppDatabase database= AppDatabase.getInstance(context);
         return new LocalUserDataSource(database.mUserDao());
     }
 

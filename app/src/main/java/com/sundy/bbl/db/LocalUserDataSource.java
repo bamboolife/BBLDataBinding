@@ -1,5 +1,8 @@
 package com.sundy.bbl.db;
 
+import com.sundy.bbl.db.dao.UserDao;
+import com.sundy.bbl.db.entity.User;
+
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 

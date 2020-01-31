@@ -6,6 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.sundy.bbl.db.dao.UserDao;
+import com.sundy.bbl.db.entity.User;
+
 /**
  * 项目名称：BBLDataBinding
  *
@@ -15,17 +18,17 @@ import androidx.room.RoomDatabase;
  * 描述：
  */
 @Database(entities = {User.class},version = 1)
-public abstract class UsersDatabase extends RoomDatabase {
-    private static volatile UsersDatabase INSTANCE;
+public abstract class AppDatabase extends RoomDatabase {
+    private static volatile AppDatabase INSTANCE;
 
     public abstract UserDao mUserDao();
 
-    public static UsersDatabase getInstance(Context context){
+    public static AppDatabase getInstance(Context context){
         if (INSTANCE==null){
-            synchronized (UsersDatabase.class){
+            synchronized (AppDatabase.class){
                 if (INSTANCE==null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            UsersDatabase.class, "Sample.db")
+                            AppDatabase.class, "Sample.db")
                             .build();
                 }
             }
