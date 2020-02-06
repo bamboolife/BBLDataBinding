@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">BBLDataBinding</string>
+    <string name="firstName">sundy</string>
+    <string name="lastName">jiang</string>
+    <string name="bananaCount">10</string>
+    <string name="orangeCount">20</string>
+    <string name="large">true</string>
 </resources>
