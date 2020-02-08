@@ -524,6 +524,10 @@ public class BothwayBindingActivity extends AppCompatActivity {
     }
 }
 ```
+
+#### 双向绑定之反向绑定的InverseBindingMethods改造和实现
+
+
 ## 四、事件绑定
 
 严格意义上来说，事件绑定也是一种变量绑定，只不过设置的变量是回调接口而已
