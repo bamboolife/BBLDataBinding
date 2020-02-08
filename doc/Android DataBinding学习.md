@@ -762,6 +762,21 @@ dataBinding 一样支持 ViewStub 布局
 ``` 
 ## 八、BindingAdapter
 
+如果我们需要自定义xml, 就需要修改View的源码 ,但是DataBinding还有第二种方法相当于可以将setter方法抽取出来, 并且同时支持多个属性.
+
+图片加载框架可以方便使用此方法.
+```java
+@BindingAdapter(value = { "imageUrl", "error" }, requireAll = false)
+  public static void loadImage(ImageView view, String url, Drawable error) {
+    Glide.with(view.getContext()).load(url).into(view);
+  }
+```
+1. 修饰方法, 要求方法必须public static
+2. 方法参数第一个要求必须是View
+3. 方法名不作要求
+4. 最后这个boolean类型是可选参数. 可以要求是否所有参数都需要填写. 默认true.
+5. 如果requireAll为false, 你没有填写的属性值将为null. 所以需要做非空判断.
+
 dataBinding 提供了 BindingAdapter 这个注解用于支持自定义属性，或者是修改原有属性。注解值可以是已有的 xml 属性，例如 android:src、android:text等，也可以自定义属性然后在 xml 中使用
 
 例如，对于一个 ImageView ，我们希望在某个变量值发生变化时，可以动态改变显示的图片，此时就可以通过 BindingAdapter 来实现
@@ -822,6 +837,14 @@ BindingAdapter 更为强大的一点是可以覆盖 Android 原先的控件属�
 这样，整个工程中使用到了 "android:text" 这个属性的控件，其显示的文本就会多出一个后缀      
 
 ## 九、BindingConversion
+
+属性值自动进行类型转换
+
+1. 只能修饰public static方法.
+2. 任意位置任意方法名都不限制
+3. DataBinding自动匹配被该注解修饰的方法和匹配参数类型
+4. 返回值类型必须和属性setter方法匹配, 且参数只能有一个
+5. 要求属性值必须是@{}DataBinding表达式
 
 dataBinding 还支持对数据进行转换，或者进行类型转换
 
@@ -891,8 +914,23 @@ xml 文件
         return Color.parseColor("#344567");
     }
 ```  
+## 十@BindingMethods
 
-## 十、Array、List、Set、Map ...
+如果你想自定义一个属性并且将他和这个View内部的函数关联就必须使用这个特性;
+
+该注解属于一个容器. 内部参数是一个@BindingMethod数组, 只能用于修饰类;
+
+```java
+@BindingMethods({
+        @BindingMethod(type = android.widget.ProgressBar.class, attribute = "android:indeterminateTint", method = "setIndeterminateTintList"),
+        @BindingMethod(type = android.widget.ProgressBar.class, attribute = "android:progressTint", method = "setProgressTintList"),
+        @BindingMethod(type = android.widget.ProgressBar.class, attribute = "android:secondaryProgressTint", method = "setSecondaryProgressTintList"),
+})
+public class ProgressBarBindingAdapter {
+}
+```
+
+## 十一、Array、List、Set、Map ...
 
 dataBinding 也支持在布局文件中使用 数组、Lsit、Set 和 Map，且在布局文件中都可以通过 list[index] 的形式来获取元素
 
@@ -989,5 +1027,14 @@ strings.xml
  android:textAllCaps="false" />
 ```
 
+| databinding注解 | 说明 |
+| --------------- | --------- |
+| Bindable |  设置数据刷新视图. 自动生成BR的ID |
+| BindingAdapter | 设置自定义属性. 可以覆盖系统原有属性 |
+| BindingMethod/BindingMethods |  关联自定义属性到控件原有的setter方法 |
+| BindingConversion | 如果属性不能匹配类型参数将自动根据类型参数匹配到该注解修饰的方法来转换 |
+| InverseMethod | 负责实现视图和数据之间的转换 |
+| InverseBindingAdapter | 视图通知数据刷新的 |
+| InverseBindingMethod/InverseBindingMethods | 视图通知数据刷新的(如果存在已有getter方法可用的情况下) |
 
    
