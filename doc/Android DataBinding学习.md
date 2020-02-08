@@ -963,7 +963,7 @@ dimens.xml
 
 ```xml
 <dimen name="paddingBig">190dp</dimen>
-    <dimen name="paddingSmall">150dp</dimen>
+<dimen name="paddingSmall">150dp</dimen>
 ```
 strings.xml
 
