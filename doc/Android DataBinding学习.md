@@ -381,11 +381,12 @@ dataBinding 也提供了包装类用于替代原生的 List 和 Map，分别是 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.databinding.ObservableList"/>
-        <import type="android.databinding.ObservableMap"/>
+        <import type="androidx.databinding.ObservableList"/>
+        <import type="androidx.databinding.ObservableMap"/>
         <variable
             name="list"
             type="ObservableList&lt;String&gt;"/>
@@ -399,31 +400,67 @@ dataBinding 也提供了包装类用于替代原生的 List 和 Map，分别是 
             name="key"
             type="String"/>
     </data>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        tools:context=".ui.aty.CollectionActivity">
 
         <TextView
-            ···
-            android:padding="20dp"
-            android:text="@{list[index],default=xx}"/>
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            ···
-            android:layout_marginTop="20dp"
-            android:padding="20dp"
-            android:text="@{map[key],default=yy}"/>
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="41dp"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/textView18"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         <Button
-            ···
+            android:id="@+id/button5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="改变数据"
             android:onClick="onClick"
-            android:text="改变数据"/>
-
-    </LinearLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView19" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
+```
+
+```java
+public class CollectionActivity extends AppCompatActivity {
+    ObservableMap<String, String> map;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BblCollectionLayoutBinding binding= DataBindingUtil.setContentView(this,R.layout.bbl_collection_layout);
+        map = new ObservableArrayMap<>();
+        map.put("name", "leavesC");
+        map.put("age", "24");
+        binding.setMap(map);
+        ObservableList<String> list = new ObservableArrayList<>();
+        list.add("Ye");
+        list.add("leavesC");
+        binding.setList(list);
+        binding.setIndex(0);
+        binding.setKey("name");
+    }
+
+    public void onClick(View view) {
+        map.put("name", "leavesC,hi" + new Random().nextInt(100));
+    }
+}
 ```
 ## 三、双向数据绑定
 
