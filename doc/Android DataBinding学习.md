@@ -138,7 +138,17 @@ public class User {
 ```
 通过 @{userInfo.name} 使 TextView 引用到相关的变量，DataBinding 会将之映射到相应的 getter 方法
 之后可以在 Activity 中通过 DataBindingUtil 设置布局文件，省略原先 Activity 的 setContentView() 方法，并为变量 userInfo 赋值
-
+```java
+    User user;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.bbl_event_binding_layout);
+        binding= DataBindingUtil.setContentView(this,R.layout.bbl_event_binding_layout);
+        user=new User("sundy","123456");
+        binding.setUserInfo(user);
+    }
+```
 由于 @{userInfo.name}在布局文件中并没有明确的值，所以在预览视图中什么都不会显示，不便于观察文本的大小和字体颜色等属性，此时可以为之设定默认值（文本内容或者是字体大小等属性都适用），默认值将只在预览视图中显示，且默认值不能包含引号
 
 ```java
