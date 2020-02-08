@@ -9,7 +9,9 @@ MVVM框架
 - 4BindingAdapter
 - 常用的activity和fragment的基类
 - 工具类
+
 必须手动实现的有
+
 - 1model的创建
 - 2viewmodel
 - 3转换工厂
