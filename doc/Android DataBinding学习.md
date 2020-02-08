@@ -471,43 +471,57 @@ public class CollectionActivity extends AppCompatActivity {
 ```java
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.leavesc.databinding_demo.model.ObservableGoods"/>
+        <import type="com.sundy.bbl.mvvm.model.ObservableGoods"/>
         <variable
             name="goods"
             type="ObservableGoods" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Main10Activity">
+        tools:context=".ui.aty.BothwayBindingActivity">
 
         <TextView
-            ···
-            android:text="@{goods.name}" />
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@{goods.name}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            ···
-            android:text="@={goods.name}" />
-
-    </LinearLayout>
+            android:id="@+id/editText3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@={goods.name}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 ```
 ```java
-public class Main10Activity extends AppCompatActivity {
+public class BothwayBindingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMain10Binding activityMain10Binding = DataBindingUtil.setContentView(this, R.layout.activity_main10);
+        BblBothwayBindingLayoutBinding binding= DataBindingUtil.setContentView(this,R.layout.bbl_bothway_binding_layout);
         ObservableGoods goods = new ObservableGoods("code", "hi", 23);
-        activityMain10Binding.setGoods(goods);
+        binding.setGoods(goods);
     }
-
 }
 ```
 ## 四、事件绑定
