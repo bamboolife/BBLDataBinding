@@ -654,7 +654,9 @@ view_include.xml
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <import type="com.sundy.bbl.mvvm.model.User" />
@@ -663,19 +665,20 @@ view_include.xml
             type="User" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#acc">
+        android:layout_height="match_parent">
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/textView21"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="20dp"
-            android:text="@{userInfo.name}" />
-
-    </android.support.constraint.ConstraintLayout>
+            android:text="@{userInfo.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 ```
 
@@ -687,23 +690,23 @@ view_include.xml
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.leavesc.databinding_demo.model.User" />
+
+        <import type="com.sundy.bbl.mvvm.model.User" />
+
         <variable
             name="userInfo"
             type="User" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".Main6Activity">
-        
+        tools:context=".ui.aty.IncludeActivity">
+
         <include
             layout="@layout/view_include"
             bind:userInfo="@{userInfo}" />
-        
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 ```
 
