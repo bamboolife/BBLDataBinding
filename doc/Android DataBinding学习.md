@@ -14,7 +14,7 @@ android {
 
 打开布局文件，选中根布局的 ViewGroup，按住 Alt + 回车键，点击 “Convert to data binding layout”，就可以生成 DataBinding 需要的布局规则
 
-![image](../image/xml.png)
+![image](../image/conver.png)
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -26,11 +26,12 @@ android {
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
-    </android.support.constraint.ConstraintLayout>
+        tools:context=".ui.aty.OperatorActivity">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 ````
 和原始布局的区别在于多出了一个 layout 标签将原布局包裹了起来，data 标签用于声明要用到的变量以及变量类型，要实现 MVVM 的 ViewModel 就需要把数据（Model）与 UI（View）进行绑定，data 标签的作用就像一个桥梁搭建了 View 和 Model 之间的通道
@@ -71,10 +72,10 @@ public class User {
 
 ```xml
 <data>
-         <variable
-             name="userInfo"
-             type="com.sundy.bbl.mvvm.model.User" />
-    </data>
+       <variable
+          name="userInfo"
+          type="com.sundy.bbl.mvvm.model.User" />
+</data>
 ```
 如果 User 类型要多处用到，也可以直接将之 import 进来，这样就不用每次都指明整个包名路径了，而 java.lang.* 包中的类会被自动导入，所以可以直接使用
 
@@ -82,23 +83,23 @@ public class User {
 <data>
   <import type="com.sundy.bbl.mvvm.model.User"/>
    <variable
-             name="userInfo"
-             type="com.sundy.bbl.mvvm.model.User" />
-             </data>
+       name="userInfo"
+       type="com.sundy.bbl.mvvm.model.User" />
+</data>
 ```
 如果存在 import 的类名相同的情况，可以使用 alias 指定别名
 
 ```xml
-   <data>
-        <import type="com.sundy.bbl.mvvm.model.User"/>
-        <import type="com.sundy.bbl.db.entity.User" alias="DbUser"/>
-        <variable
+<data>
+      <import type="com.sundy.bbl.mvvm.model.User"/>
+      <import type="com.sundy.bbl.db.entity.User" alias="DbUser"/>
+      <variable
         name="user"
         type="User" />
-        <variable
-            name="dbuerInfo"
-            type="DbUser" />
-    </data>
+      <variable
+        name="dbuerInfo"
+        type="DbUser" />
+</data>
 
 ```
 
@@ -323,20 +324,20 @@ public class SingleBindingActivity extends AppCompatActivity {
 
 当中 propertyId 就用于标识特定的字段
 ```java
-        goods.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
-            @Override
-            public void onPropertyChanged(Observable sender, int propertyId) {
-                if (propertyId == com.leavesc.databinding_demo.BR.name) {
-                    Log.e(TAG, "BR.name");
-                } else if (propertyId == com.leavesc.databinding_demo.BR.details) {
-                    Log.e(TAG, "BR.details");
-                } else if (propertyId == com.leavesc.databinding_demo.BR._all) {
-                    Log.e(TAG, "BR._all");
-                } else {
-                    Log.e(TAG, "未知");
-                }
-            }
-        });
+ goods.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+     @Override
+     public void onPropertyChanged(Observable sender, int propertyId) {
+         if (propertyId == com.leavesc.databinding_demo.BR.name) {
+             Log.e(TAG, "BR.name");
+         } else if (propertyId == com.leavesc.databinding_demo.BR.details) {
+             Log.e(TAG, "BR.details");
+         } else if (propertyId == com.leavesc.databinding_demo.BR._all) {
+             Log.e(TAG, "BR._all");
+         } else {
+             Log.e(TAG, "未知");
+         }
+     }
+ });
 
 ```
 #### ObservableField
@@ -767,11 +768,11 @@ dataBinding 还支持对数据进行转换，或者进行类型转换
 xml 文件
 
 ```xml
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text='@{"xxx"}'
-            android:textAllCaps="false"/>
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:text='@{"xxx"}'
+     android:textAllCaps="false"/>
 ```
 
 可以看到，对于 Button 来说，BindingAdapter 和 BindingConversion 同时生效了，而 BindingConversion 的优先级要高些
@@ -782,21 +783,21 @@ xml 文件
 
 ```xml
 <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background='@{"红色"}'
-            android:padding="20dp"
-            android:text="红色背景蓝色字"
-            android:textColor='@{"蓝色"}'/>
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:background='@{"红色"}'
+   android:padding="20dp"
+   android:text="红色背景蓝色字"
+   android:textColor='@{"蓝色"}'/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background='@{"蓝色"}'
-            android:padding="20dp"
-            android:text="蓝色背景红色字"
-            android:textColor='@{"红色"}'/>
+<TextView
+   android:layout_width="match_parent"
+   android:layout_height="wrap_content"
+   android:layout_marginTop="20dp"
+   android:background='@{"蓝色"}'
+   android:padding="20dp"
+   android:text="蓝色背景红色字"
+   android:textColor='@{"红色"}'/>
 ```    
 
 ```java
@@ -908,16 +909,16 @@ strings.xml
 
 ```xml
 <data>
-        <variable
-            name="flag"
-            type="boolean" />
-    </data>       
-    <Button
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:paddingLeft="@{flag ? @dimen/paddingBig:@dimen/paddingSmall}"
-         android:text='@{@string/format("leavesC", "Ye")}'
-         android:textAllCaps="false" />
+     <variable
+          name="flag"
+          type="boolean" />
+</data>       
+<Button
+ android:layout_width="match_parent"
+ android:layout_height="wrap_content"
+ android:paddingLeft="@{flag ? @dimen/paddingBig:@dimen/paddingSmall}"
+ android:text='@{@string/format("leavesC", "Ye")}'
+ android:textAllCaps="false" />
 ```
 
 
