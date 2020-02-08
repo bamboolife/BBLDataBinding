@@ -5,4 +5,11 @@
     <string name="bananaCount">10</string>
     <string name="orangeCount">20</string>
     <string name="large">true</string>
+    <string name="nameFormat">Full Name: %1$s:%2$s</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="red">红色</string>
+    <string name="white">白色</string>
 </resources>

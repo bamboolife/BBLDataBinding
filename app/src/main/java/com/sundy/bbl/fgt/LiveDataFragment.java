@@ -1,5 +1,6 @@
 package com.sundy.bbl.fgt;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +15,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.sundy.bbl.R;
+import com.sundy.bbl.ui.aty.ResourceBindingActivity;
 import com.sundy.bbl.mvvm.NameViewModel;
-import com.sundy.common.base.BaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,6 +84,8 @@ public class LiveDataFragment extends Fragment {
                     nameList.add("Jane<" + i + ">");
                 }
                 mNameViewModel.getNameListData().setValue(nameList);
+                Intent intent=new Intent(getContext(), ResourceBindingActivity.class);
+                startActivity(intent);
             }
         });
     }

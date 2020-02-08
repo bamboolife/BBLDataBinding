@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResourceBindingActivity"></activity>
+        <activity android:name=".ui.aty.EventBindingActivity"></activity>
+        <activity android:name=".ui.aty.BothwayBindingActivity" />
+        <activity android:name=".ui.aty.SingleBindingActivity" />
+        <activity android:name=".ui.aty.XmlBindingBeanActivity" />
+        <activity android:name=".ui.aty.ViewStubActivity" />
+        <activity android:name=".ui.aty.UtilsBindingActivity" />
+        <activity android:name=".ui.aty.FontBindingActivity" />
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".ui.aty.ResourceBindingActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

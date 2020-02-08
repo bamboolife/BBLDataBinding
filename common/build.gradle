@@ -44,11 +44,14 @@ dependencies {
 
     // optional - RxJava support for Room
     api "androidx.room:room-rxjava2:2.2.3"
-    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    api 'androidx.recyclerview:recyclerview:1.1.0'
 
     // optional - Guava support for Room, including Optional and ListenableFuture
    // implementation "androidx.room:room-guava:$room_version"
 
     // Test helpers
     //testImplementation "androidx.room:room-testing:$room_version"
+
+    //base adapter
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
 }

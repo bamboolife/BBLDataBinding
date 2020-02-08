@@ -29,7 +29,6 @@ public abstract class BaseQuickAdapter<M, DB extends ViewDataBinding> extends Re
     private Context mContext;
     List<M> datas;
     OnItemClickListener mOnItemClickListener;
-
     public BaseQuickAdapter() {
 
     }
@@ -62,7 +61,7 @@ public abstract class BaseQuickAdapter<M, DB extends ViewDataBinding> extends Re
 
     @Override
     public int getItemCount() {
-        return datas.size();
+        return datas==null?0:datas.size();
     }
 
     @Override
@@ -116,6 +115,9 @@ public abstract class BaseQuickAdapter<M, DB extends ViewDataBinding> extends Re
      * 在末尾添加集合
      */
     public void addDatas(@NonNull Collection<? extends M> newData) {
+       if (datas==null){
+           datas=new ArrayList<>();
+       }
         datas.addAll(newData);
         notifyItemRangeInserted(datas.size(), newData.size());
 
