@@ -3,12 +3,13 @@ MVVM框架
 
 通过学习MVVM架构，封装可以从以下几点入手
 
-- 1适配器 
-- 2获取model
-- 3获取viewmodel工厂
-- 4BindingAdapter
-- 常用的activity和fragment的基类
-- 工具类
+- 1.适配器 
+- 2.获取model
+- 3.获取viewmodel工厂
+- 4.BindingAdapter
+- 5.常用的activity和fragment的基类
+- 6.工具类
+- 7.网络库
 
 必须手动实现的有
 
@@ -16,3 +17,4 @@ MVVM框架
 - 2viewmodel
 - 3转换工厂
 - 4xml布局
+- 5业务逻辑
